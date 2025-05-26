@@ -22,6 +22,8 @@ export default class Player {
 
   draw(ctx) {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.collideWithWalls()
+
   }
     keydown = (event) => {
       if (event.code == "ArrowRight") {
@@ -44,6 +46,13 @@ export default class Player {
         }else if(this.leftPressed){
             this.x -= this.velocity;
             console.log("leftPressed " + this.leftPressed);
+        }
+    }
+    collideWithWalls() {
+        if (this.x < 0) {
+            this.x = 0;
+        } else if (this.x > this.canvas.width-this.width) {
+            this.x = this.canvas.width - this.width;
         }
     }
 }
