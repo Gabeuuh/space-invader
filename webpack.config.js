@@ -19,8 +19,11 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        use: ["file-loader"],
-      },
+        use: "file-loader",
+      },{
+        test : /\.wav$/,
+        loader : 'file-loader',
+      }
     ],
   },
 };
