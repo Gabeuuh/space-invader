@@ -19,9 +19,12 @@ export default class InvaderController {
   moveDownTimerDefault = 30;
   moveDownTimer = this.moveDownTimerDefault;
 
-  constructor(canvas) {
+  constructor(canvas, bulletController) {
+    this.bulletController = bulletController;
     this.canvas = canvas;
     this.createInvaders();
+    this.fireBulletTimerDefault = 100;
+    this.fireBulletTimer = this.fireBulletTimerDefault;
   }
   draw(ctx) {
     this.decrementMoveDownTimer();
@@ -107,6 +110,16 @@ export default class InvaderController {
       this.currentDirection === MovingDirection.downRight
     ) {
       this.moveDownTimer--;
+    }
+  }
+  fireBullet() {
+    this.fireBulletTimer--;
+    if (this.fireBulletTimer <= 0) {
+        this.fireBulletTimer = this.fireBulletTimerDefault;
+        const allInvaders = this.invadersRows.flat();
+        const invaderIndex = Math.floor(Math.random() * allInvaders.length);
+        const invader = allInvaders[invaderIndex];
+        this.bulletController.shoot(invader.x+invader.width/2, invader.y, -3)
     }
   }
 }

@@ -12,16 +12,19 @@ canvas.width = 600;
 canvas.height = 600;
 
 const playerBulletController = new BulletController(canvas, 10, "red", true);
+const invaderBulletController = new BulletController(canvas, 4, "white", false);
 
 const player = new Player(canvas,3,playerBulletController);
-const invaderController = new InvaderController(canvas);
+const invaderController = new InvaderController(canvas, invaderBulletController);
 
 
 function game(){
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     invaderController.draw(ctx);
+    invaderController.fireBullet(); 
     player.draw(ctx);
     playerBulletController.draw(ctx);
+    invaderBulletController.draw(ctx);
 }
 setInterval(game, 1000/60);
 
