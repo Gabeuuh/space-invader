@@ -7,8 +7,8 @@ export default class Player {
     this.canvas = canvas;
     this.velocity = velocity;
 
-    this.x = canvas.width/2; 
-    this.y = canvas.height - 25;
+    this.x = canvas.width /2; 
+    this.y = canvas.height - 50;
     this.width = 40;
     this.height = 40;
     this.image = new Image();

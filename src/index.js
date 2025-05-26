@@ -6,9 +6,9 @@ import InvaderController from './invaderController';
 
 let canvas = document.getElementById('game');
 let ctx = canvas.getContext('2d');
-const player = new Player(canvas, 3);
 canvas.width = 600;
 canvas.height = 600;
+const player = new Player(canvas, 3);
 const invaderController = new InvaderController(canvas);
 
 function game(){
