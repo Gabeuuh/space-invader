@@ -36,4 +36,14 @@ export default class BulletController {
     }
     this.bullets.forEach((bullet) => bullet.draw(ctx));
   }
+  collideWith(sprite) {
+    const bulletThatHitSpriteIndex = this.bullets.findIndex((bullet) =>
+        bullet.collideWith(sprite)
+        );
+        if (bulletThatHitSpriteIndex >= 0) {
+            this.bullets.splice(bulletThatHitSpriteIndex, 1);
+            return true;
+        }
+        return false;
+}
 }

@@ -15,13 +15,14 @@ const playerBulletController = new BulletController(canvas, 10, "red", true);
 const invaderBulletController = new BulletController(canvas, 4, "white", false);
 
 const player = new Player(canvas,3,playerBulletController);
-const invaderController = new InvaderController(canvas, invaderBulletController);
+const invaderController = new InvaderController(canvas, invaderBulletController, playerBulletController);
 
 
 function game(){
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     invaderController.draw(ctx);
     invaderController.fireBullet(); 
+    invaderController.collisionDetection()
     player.draw(ctx);
     playerBulletController.draw(ctx);
     invaderBulletController.draw(ctx);

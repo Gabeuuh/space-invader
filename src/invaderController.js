@@ -19,9 +19,10 @@ export default class InvaderController {
   moveDownTimerDefault = 30;
   moveDownTimer = this.moveDownTimerDefault;
 
-  constructor(canvas, bulletController) {
+  constructor(canvas, bulletController, playerBulletController) {
     this.bulletController = bulletController;
     this.canvas = canvas;
+    this.playerBulletController = playerBulletController;
     this.createInvaders();
     this.fireBulletTimerDefault = 100;
     this.fireBulletTimer = this.fireBulletTimerDefault;
@@ -115,11 +116,21 @@ export default class InvaderController {
   fireBullet() {
     this.fireBulletTimer--;
     if (this.fireBulletTimer <= 0) {
-        this.fireBulletTimer = this.fireBulletTimerDefault;
-        const allInvaders = this.invadersRows.flat();
-        const invaderIndex = Math.floor(Math.random() * allInvaders.length);
-        const invader = allInvaders[invaderIndex];
-        this.bulletController.shoot(invader.x+invader.width/2, invader.y, -3)
+      this.fireBulletTimer = this.fireBulletTimerDefault;
+      const allInvaders = this.invadersRows.flat();
+      const invaderIndex = Math.floor(Math.random() * allInvaders.length);
+      const invader = allInvaders[invaderIndex];
+      this.bulletController.shoot(invader.x + invader.width / 2, invader.y, -3);
     }
   }
+collisionDetection(){
+    this.invadersRows.forEach((invaderRow) => {
+        invaderRow.forEach((invader, invaderIndex) => {
+            if(this.playerBulletController.collideWith(invader)) {
+                invaderRow.splice(invaderIndex, 1);
+            }
+        });
+    });
+    this.invadersRows = this.invadersRows.filter((invaderRow) => invaderRow.length > 0);
+}
 }
