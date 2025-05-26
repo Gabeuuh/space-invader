@@ -15,6 +15,7 @@ function game(){
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     invaderController.draw(ctx);
     player.draw(ctx);
+    player.move();
 }
 setInterval(game, 1000/60);
 

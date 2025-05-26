@@ -1,9 +1,12 @@
 import PlayerSprite from '../assets/images/player.png';
 
+let rightPressed = false;
+let leftPressed = false;
+
 export default class Player {
   constructor(canvas, velocity) {
-    console.log(canvas.width, "CANVAS WIDTH");
-    console.log(canvas.height, "CANVAS HEIGHT");
+    document.addEventListener("keydown", this.keydown);
+    document.addEventListener("keyup", this.keyup);
     this.canvas = canvas;
     this.velocity = velocity;
 
@@ -14,9 +17,33 @@ export default class Player {
     this.image = new Image();
     this.image.src = PlayerSprite;
 
+
   }
 
   draw(ctx) {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
+    keydown = (event) => {
+      if (event.code == "ArrowRight") {
+        this.rightPressed = true;
+      } else if (event.code == "ArrowLeft") {
+        this.leftPressed = true;
+      }
+    }
+    keyup = (event) => {
+      if (event.code == "ArrowRight") {
+        this.rightPressed = false;
+      } else if (event.code == "ArrowLeft") {
+        this.leftPressed = false;
+      }  
+    };
+    move(){
+        if(this.rightPressed){
+            this.x += this.velocity;
+            console.log("rightPressed " + this.rightPressed);
+        }else if(this.leftPressed){
+            this.x -= this.velocity;
+            console.log("leftPressed " + this.leftPressed);
+        }
+    }
 }
